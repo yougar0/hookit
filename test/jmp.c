@@ -13,14 +13,14 @@ int sub(int a, int b) {
 }
 
 int main(int argc, char** argv) {
-    mprotect(PAGE_START((unsigned long)add), PAGESIZE, PROT_EXEC | PROT_READ | PROT_WRITE);
+    mprotect(PAGE_START((unsigned long)add), PAGESIZE, PROT_READ | PROT_WRITE | PROT_EXEC);
     u8* addr = add;
     addr[0] = 0xFF;
     addr[1] = 0x25;
     *(unsigned int*)&addr[2] = 0x00000000;
     *(unsigned long*)&addr[6] = sub;
+    mprotect(PAGE_START((unsigned long)add), PAGESIZE, PROT_READ | PROT_EXEC);
     int a = 2, b =2;
     printf("%d + %d = %d\n", a, b, add(a, b));
-    mprotect(PAGE_START((unsigned long)add), PAGESIZE, PROT_READ | PROT_WRITE);
     return 0;
 }

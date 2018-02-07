@@ -1,4 +1,5 @@
 #include "hookit_func.h"
+#include "capstone/capstone.h"
 #include <stdlib.h>
 
 struct hookit_func_type {
