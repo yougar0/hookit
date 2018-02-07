@@ -6,3 +6,6 @@ clean:
 
 dis:
 	gcc -o disasm disassemble.c -L$(shell pwd)/../ -lcapstone -Wl,-R $(shell pwd)/../
+
+hook:
+	gcc -o hook hook.c -L$(shell pwd)/../ -lcapstone -Wl,-R $(shell pwd)/../ $(GDB)
